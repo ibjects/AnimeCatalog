@@ -147,7 +147,6 @@ android/assets/index.android.bundle.meta
 ios/.xcode.env.local
 
 # Android/IntelliJ
-android/app/src/main/embrace-config.json
 #
 android/build/
 android/**/build/
@@ -248,3 +247,4 @@ src/.DS_Store
 android/.gradle/8.0.1/executionHistory/*
 android/app/build/outputs/apk/*
 # android/gradle.properties
+*.xcuserstate
