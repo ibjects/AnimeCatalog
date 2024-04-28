@@ -3,3 +3,9 @@ const baseURl = 'https://api.jikan.moe/v4/'
 // https://api.jikan.moe/v4/seasons/upcoming
 // https://api.jikan.moe/v4/anime?q=&status=airing
 // https://api.jikan.moe/v4/anime?q=&status=complete
+
+export enum Status {
+    Airing = 'Airing',
+    Complete = 'Complete',
+    Upcoming = 'Upcoming'
+}

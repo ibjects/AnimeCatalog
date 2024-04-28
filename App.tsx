@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer, ParamListBase, RouteProp } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './src/screens/Home';
 import Details from './src/screens/Details';
 import Favourites from './src/screens/Favourites';
+import { Status } from './src/utils/constants';
 
 function App(): React.JSX.Element {
 
@@ -33,18 +34,18 @@ function App(): React.JSX.Element {
       <Tab.Navigator screenOptions={hideHeaderCompletelyOptions}>
         <Tab.Screen
           name="Airing"
-          children={() => <Home status="airing" />}
-          options={{ tabBarLabel: 'Airing' }}
-        />
-        <Tab.Screen
-          name="Complete"
-          children={() => <Home status="complete" />}
-          options={{ tabBarLabel: 'Complete' }}
+          children={() => <Home status={Status.Airing} />}
+          options={{ tabBarLabel: Status.Airing }}
         />
         <Tab.Screen
           name="Upcoming"
-          children={() => <Home status="upcoming" />}
-          options={{ tabBarLabel: 'Upcoming' }}
+          children={() => <Home status={Status.Upcoming} />}
+          options={{ tabBarLabel: Status.Upcoming }}
+        />
+        <Tab.Screen
+          name="Complete"
+          children={() => <Home status={Status.Complete} />}
+          options={{ tabBarLabel: Status.Complete }}
         />
       </Tab.Navigator>
     );

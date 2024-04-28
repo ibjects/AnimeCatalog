@@ -1,16 +1,29 @@
 // Anime Listing View
 
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, StyleSheet, View, ScrollView } from 'react-native'
+import { Status } from '../utils/constants';
 
 interface HomeProps {
-    status: 'airing' | 'complete' | 'upcoming';
+    status: Status;
 }
 
 export default function Home({ status }: HomeProps) {
     return (
-        <View>
-            <Text>Home {status}</Text>
-        </View>
+        <ScrollView contentContainerStyle={styles.container}>
+            <Text style={styles.heading}>{status}</Text>
+        </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    heading: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+})
