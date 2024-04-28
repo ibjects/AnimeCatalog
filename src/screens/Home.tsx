@@ -10,7 +10,7 @@ interface HomeProps {
 export default function Home({ status }: HomeProps) {
     return (
         <View>
-            <Text>Home</Text>
+            <Text>Home {status}</Text>
         </View>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, ParamListBase, RouteProp } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -14,10 +14,14 @@ function App(): React.JSX.Element {
   const Tab = createBottomTabNavigator();
   const Drawer = createDrawerNavigator();
 
+  const hideHeaderCompletelyOptions = {
+    headerShown: false
+  }
+
   function MainStack() {
     return (
-      <Stack.Navigator>
-        <Stack.Screen name="AnimeTabs" component={AnimeTabs} options={{ headerTitle: 'Anime Listing' }} />
+      <Stack.Navigator screenOptions={hideHeaderCompletelyOptions}>
+        <Stack.Screen name="AnimeTabs" component={AnimeTabs} />
         <Stack.Screen name="Favorites" component={Favourites} options={{ headerTitle: 'Favorites' }} />
         <Stack.Screen name="Details" component={Details} options={{ headerTitle: 'Details' }} />
       </Stack.Navigator>
@@ -26,7 +30,7 @@ function App(): React.JSX.Element {
 
   function AnimeTabs() {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={hideHeaderCompletelyOptions}>
         <Tab.Screen
           name="Airing"
           children={() => <Home status="airing" />}
@@ -49,7 +53,8 @@ function App(): React.JSX.Element {
   function MainDrawer() {
     return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Anime" component={MainStack} options={{ drawerLabel: 'Anime & Favorites' }} />
+        <Drawer.Screen name="Anime Listing" component={MainStack} options={{ headerTitle: 'Anime Listing', drawerLabel: 'Anime Listing' }} />
+        <Drawer.Screen name="Favorites" component={Favourites} options={{ drawerLabel: 'Favorites' }} />
       </Drawer.Navigator>
     );
   }
