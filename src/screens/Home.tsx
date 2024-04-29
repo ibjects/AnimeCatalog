@@ -1,7 +1,8 @@
+/* eslint-disable prettier/prettier */
 // Anime Listing View
 
-import React from 'react'
-import { Text, StyleSheet, View, ScrollView } from 'react-native'
+import React from 'react';
+import { Text, StyleSheet, ScrollView } from 'react-native';
 import { Status } from '../utils/constants';
 
 interface HomeProps {
@@ -13,7 +14,7 @@ export default function Home({ status }: HomeProps) {
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.heading}>{status}</Text>
         </ScrollView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
