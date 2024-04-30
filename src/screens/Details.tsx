@@ -76,10 +76,10 @@ export default function Details() {
     return (
         <ScrollView>
             <View style={styles.headerContainer}>
-                <Image
+                {images?.jpg?.image_url && <Image
                     style={styles.featuredImage}
                     source={{ uri: images.jpg.image_url }}
-                    resizeMode="contain" />
+                    resizeMode="contain" />}
                 <View style={styles.contentContainer}>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.subTitle}>{source} {year && `• ${year} `}• {duration}</Text>
