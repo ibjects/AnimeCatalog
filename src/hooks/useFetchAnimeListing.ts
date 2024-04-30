@@ -22,7 +22,7 @@ export const useFetchAnimeListing = (status: Status) => {
         queryFn: () => fetch(`${BaseURL}/${urlParameters}`).then((res) => res.json()),
         select: data => {
             // Sort by score descending
-            const sortedAnime = data.data.sort((a, b) => b.score - a.score); 
+            const sortedAnime = data.data.sort((a, b) => b.score - a.score);
             return {
                 ...data,
                 data: sortedAnime,

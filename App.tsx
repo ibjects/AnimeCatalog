@@ -29,7 +29,7 @@ function App(): React.JSX.Element {
   function MainStack() {
     return (
       <Stack.Navigator screenOptions={{
-        headerTintColor: COLORS.black,
+        headerTintColor: COLORS.bg_black,
       }}>
         <Stack.Screen name="AnimeTabs" component={AnimeTabs} options={{ headerTitle: 'Anime Listing', headerLeft: () => <CustomDrawerButton /> }} />
         <Stack.Screen name="Favorites" component={Favourites} options={{ headerTitle: 'Favorites', headerLeft: () => <CustomDrawerButton /> }} />
@@ -93,7 +93,7 @@ function App(): React.JSX.Element {
   function MainDrawer() {
     return (
       <Drawer.Navigator screenOptions={{
-        headerTintColor: COLORS.black,
+        headerTintColor: COLORS.bg_black,
       }}>
         <Drawer.Screen name="Anime Listing" component={MainStack} options={{ drawerLabel: 'Anime Listing', headerShown: false }} />
         <Drawer.Screen name="Favorites" component={Favourites} options={{ drawerLabel: 'Favorites', headerLeft: () => <CustomDrawerButton /> }} />

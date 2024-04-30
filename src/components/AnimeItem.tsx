@@ -18,7 +18,7 @@ export default function AnimeItem({ animeItem }: AnimeItemProps) {
 
     return (
         <View style={styles.container}>
-            <Pressable style={styles.animeContainer} onPress={() => navigation.navigate('Details')}>
+            <Pressable style={styles.animeContainer} onPress={() => navigation.navigate('Details', { selectedAnimeItemMalId: animeItem.mal_id })}>
                 <ImageBackground source={{ uri: animeItem.images.jpg.image_url }} style={styles.featuredImage} resizeMode="cover">
                     <View style={styles.imageOverlay} />
                     <Text style={styles.titleLabel} numberOfLines={2} ellipsizeMode="tail">{animeItem.title}</Text>

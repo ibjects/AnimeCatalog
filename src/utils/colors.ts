@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 export const COLORS = {
-    black: '#1C274C',
+    blue_shade: '#1C274C',
+    bg_black: '#1F1F1F',
     lightGray: '#D9D9D9',
     yellow: '#F8E79C',
     red: '#C63133',

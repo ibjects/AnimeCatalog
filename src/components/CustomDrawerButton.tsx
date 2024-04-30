@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     buttonText: {
-        color: COLORS.black,
+        color: COLORS.blue_shade,
         fontSize: 20,
     },
 });

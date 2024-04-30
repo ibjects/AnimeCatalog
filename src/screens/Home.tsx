@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { Text, StyleSheet, View, FlatList, ActivityIndicator, TextInput } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TextInput } from 'react-native';
 import { Status } from '../utils/constants';
 import { useFetchAnimeListing } from '../hooks/useFetchAnimeListing';
 import AnimeItem from '../components/AnimeItem';
 import { COLORS } from '../utils/colors';
+import Loading from '../components/Loading';
 
 interface HomeProps {
     status: Status;
@@ -14,7 +15,7 @@ export default function Home({ status }: HomeProps) {
 
     const { animeList, isLoading, isError } = useFetchAnimeListing(status);
 
-    if (isLoading) { return <ActivityIndicator size={'large'} style={styles.loading} />; }
+    if (isLoading) { return <Loading />; }
     if (isError) { return <Text>Error...</Text>; }
 
     return (
@@ -39,11 +40,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 12,
     },
-    loading: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
