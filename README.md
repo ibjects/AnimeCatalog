@@ -1,6 +1,8 @@
 # Anime Catalog
 *React Query Example Project*
 
+### DOWNLOAD APK: https://github.com/thechaudharysab/AnimeCatalog/releases/tag/v1.0
+
 - NodeJS v18.19.1
 - npm v10.2.4
 - Java v17
