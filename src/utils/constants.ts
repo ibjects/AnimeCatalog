@@ -6,3 +6,5 @@ export enum Status {
     Complete = 'Complete',
     Upcoming = 'Upcoming'
 }
+
+export const FAVORITES_KEY = '@favorites';

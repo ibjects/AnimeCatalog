@@ -10,4 +10,14 @@
 2. Open terminal `cd <project path>` and then run `yarn`
 3. _For Android Only_: Open `/AnimeCatalog/android` folder **Android Studio** and sync gradle.
 4. _For iOS only_: Open terminal `cd <project path>` and then run `yarn pod-install`
-5. To run on Android: Open terminal `cd <project path>` and then run `yarn start` and press `a` to run on android. \*If you face an unknown error, please try `yarn start --reset-cache` and press `a` to run on android.
+5. To run on Android: Open terminal `cd <project path>` and then run `yarn start` and press `a` to run on android. *If you face an unknown error, please try `yarn start --reset-cache` and press `a` to run on android.*
+
+
+#### Debugging & Testing
+
+**The app is only tested on Android**
+
+Pods folder cleaning and reinstalling:
+
+- `cd ios` > `pod repo update` > `pod cache clean --all`
+- Then remove the pod files and install again, for example: `rm Podfile.lock` > `rm -rf Pods/` > `pod install --verbose`

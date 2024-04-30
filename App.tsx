@@ -15,6 +15,7 @@ import { Status } from './src/utils/constants';
 import { Image } from 'react-native';
 import { COLORS } from './src/utils/colors';
 import CustomDrawerButton from './src/components/CustomDrawerButton';
+import CustomDrawerHeader from './src/components/CustomDrawerHeader';
 
 function App(): React.JSX.Element {
 
@@ -32,6 +33,14 @@ function App(): React.JSX.Element {
         headerTintColor: COLORS.bg_black,
       }}>
         <Stack.Screen name="AnimeTabs" component={AnimeTabs} options={{ headerTitle: 'Anime Listing', headerLeft: () => <CustomDrawerButton /> }} />
+        <Stack.Screen name="Details" component={Details} options={{ headerTitle: 'Details' }} />
+      </Stack.Navigator>
+    );
+  }
+
+  function FavoritesStack() {
+    return (
+      <Stack.Navigator>
         <Stack.Screen name="Favorites" component={Favourites} options={{ headerTitle: 'Favorites', headerLeft: () => <CustomDrawerButton /> }} />
         <Stack.Screen name="Details" component={Details} options={{ headerTitle: 'Details' }} />
       </Stack.Navigator>
@@ -92,11 +101,14 @@ function App(): React.JSX.Element {
 
   function MainDrawer() {
     return (
-      <Drawer.Navigator screenOptions={{
-        headerTintColor: COLORS.bg_black,
-      }}>
-        <Drawer.Screen name="Anime Listing" component={MainStack} options={{ drawerLabel: 'Anime Listing', headerShown: false }} />
-        <Drawer.Screen name="Favorites" component={Favourites} options={{ drawerLabel: 'Favorites', headerLeft: () => <CustomDrawerButton /> }} />
+      <Drawer.Navigator
+        screenOptions={{
+          headerTintColor: COLORS.bg_black,
+          headerShown: false,
+        }}
+        drawerContent={(props) => <CustomDrawerHeader {...props} />}>
+        <Drawer.Screen name="AnimeListing" component={MainStack} options={{ drawerLabel: '🎎 Anime Listing' }} />
+        <Drawer.Screen name="FavoritesStack" component={FavoritesStack} options={{ drawerLabel: '❤️ Favorites' }} />
       </Drawer.Navigator>
     );
   }

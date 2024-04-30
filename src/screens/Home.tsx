@@ -14,21 +14,32 @@ interface HomeProps {
 export default function Home({ status }: HomeProps) {
 
     const [searchQuery, setSearchQuery] = useState('');
-    const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage } = useFetchAnimeListing(status);
+    const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage, refetch } = useFetchAnimeListing(status);
 
     // Using useMemo to avoid unnecessary recalculations
     const filteredData = useMemo(() => {
-        return data?.pages.flatMap(page => page.data)
-            .filter(anime => anime?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
+        if (data) {
+            return data.pages.flatMap(page => page.data)
+                .filter(anime => anime?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
+        }
     }, [data, searchQuery]);
 
+    if (isLoading) { return <Loading />; }
+    if (isError) {
+        return (
+            <View style={styles.errorViewContainer}>
+                <Text>Error occured. Please try again.</Text>
+                <TouchableOpacity onPress={() => refetch()}>
+                    <Text style={styles.retryButton}>Retry</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
     const handleClear = () => {
-        // Clear search query and reset allRoutes to original data
+        // Clear search query
         setSearchQuery('');
     };
-
-    if (isLoading) { return <Loading />; }
-    if (isError) { return <Text>Error...</Text>; }
 
     return (
         <View style={styles.container}>
@@ -96,5 +107,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
+    },
+    errorViewContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    retryButton: {
+        fontSize: 16,
+        color: COLORS.blue,
     },
 });

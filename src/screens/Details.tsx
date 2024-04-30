@@ -2,8 +2,9 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, Linking, TouchableOpacity, Alert } from 'react-native';
+
 import { RootStackParamList } from '../utils/RootStackParmsList';
-import { useAnimeDetails } from '../hooks';
+import { useAnimeDetails, useFavourites } from '../hooks';
 import Loading from '../components/Loading';
 import { COLORS } from '../utils/colors';
 import Divider from '../components/Divider';
@@ -13,23 +14,13 @@ type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
 export default function Details() {
 
     const route = useRoute<DetailsScreenRouteProp>();
-
     const { selectedAnimeItemMalId } = route.params;
 
     const { data, isLoading, isError } = useAnimeDetails(selectedAnimeItemMalId);
+    const { favourites, addFavourite, removeFavourite } = useFavourites();
 
     if (isLoading) { return <Loading />; }
-    if (isError) { return <Text>Error...</Text>; }
-
-    const openTrailerURL = async (url: string) => {
-        const supported = await Linking.canOpenURL(url);
-
-        if (supported) {
-            await Linking.openURL(url);
-        } else {
-            Alert.alert('There was a problem opening the trailer.');
-        }
-    };
+    if (isError) { return <Text>Error occured. Please try again.</Text>; }
 
     const {
         title,
@@ -44,7 +35,43 @@ export default function Details() {
         synopsis,
         images,
         trailer,
-    } = data.data;
+    } = data.data ?? {};
+
+    const isFavourite = favourites.some(item => item.mal_id === selectedAnimeItemMalId);
+
+    const openTrailerURL = async (url: string) => {
+        const supported = await Linking.canOpenURL(url);
+
+        if (supported) {
+            await Linking.openURL(url);
+        } else {
+            Alert.alert('There was a problem opening the trailer.');
+        }
+    };
+
+    const getFavButtonTitle = () => {
+        if (isFavourite) {
+            return '♡ Remove from Favourites';
+        }
+        return '♡ Add to Favourites';
+    };
+
+    const setFav = () => {
+        if (isFavourite) {
+            removeFavourite(selectedAnimeItemMalId);
+        } else {
+            const favData: AnimeCatalog.Anime = {
+                mal_id: selectedAnimeItemMalId,
+                images: {
+                    jpg: {
+                        image_url: images.jpg.image_url,
+                    },
+                },
+                title, rating, score, year,
+            };
+            addFavourite(favData);
+        }
+    };
 
     return (
         <ScrollView>
@@ -65,12 +92,8 @@ export default function Details() {
                     </TouchableOpacity>}
                 </View>
             </View>
-            {/* TODO: REMOVE THIS UI TEST CONDITION */}
-            {/* <Pressable style={styles.favouriteButtonContainer}>
-                <Text style={styles.favouriteLabel}>{(animeItem.mal_id % 2 === 0) ? '♡' : '♥'}</Text>
-            </Pressable> */}
-            <TouchableOpacity style={styles.favButton}>
-                <Text style={styles.favButtonLabel}>♡ Add to Favourite</Text>
+            <TouchableOpacity style={[styles.favButton, { backgroundColor: isFavourite ? COLORS.red : COLORS.blue }]} onPress={() => setFav()}>
+                <Text style={styles.favButtonLabel}>{getFavButtonTitle()}</Text>
             </TouchableOpacity>
             <View style={styles.detailsContainer}>
                 <Text style={styles.detailsText}>{synopsis}</Text>
@@ -122,7 +145,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     favButton: {
-        backgroundColor: COLORS.blue,
         justifyContent: 'center',
         alignItems: 'center',
         height: 40,

@@ -11,11 +11,17 @@ const useFetchAnimeListing = (status: Status) => {
 
     return useInfiniteQuery({
         queryKey: ['getAnimeList', status],
-        queryFn: ({ pageParam = 1 }) => fetch(`${BaseURL}/${urlParameters}${pageParam}`).then((res) => res.json()),
+        queryFn: ({ pageParam = 1 }) => fetch(`${BaseURL}/${urlParameters}${pageParam}`).then((res) => {
+            if (!res.ok) {
+                throw new Error(`Network response was not ok, status ${res.status}`);
+            }
+            return res.json();
+        }),
         initialPageParam: 1,
         getNextPageParam: (lastPage, _allPages) => {
             return lastPage.pagination?.has_next_page ? lastPage.pagination.current_page + 1 : undefined;
         },
+        retry: 2,
     });
 };
 

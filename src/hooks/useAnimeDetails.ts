@@ -6,6 +6,7 @@ const useAnimeDetails = (malId: number) => {
         queryKey: ['getAnimeDetails', malId],
         queryFn: () => fetch(`https://api.jikan.moe/v4/anime/${malId}`).then((res) => res.json()),
         enabled: !!malId,
+        retry: 2,
     });
 };
 
