@@ -14,6 +14,7 @@ import Favourites from './src/screens/Favourites';
 import { Status } from './src/utils/constants';
 import { Image } from 'react-native';
 import { COLORS } from './src/utils/colors';
+import CustomDrawerButton from './src/components/CustomDrawerButton';
 
 function App(): React.JSX.Element {
 
@@ -23,17 +24,15 @@ function App(): React.JSX.Element {
   const Tab = createBottomTabNavigator();
   const Drawer = createDrawerNavigator();
 
-  const hideHeaderCompletelyOptions = {
-    headerShown: false,
-  };
-
   const tabBarItemIconStyle = { width: 20, height: 20 };
 
   function MainStack() {
     return (
-      <Stack.Navigator screenOptions={hideHeaderCompletelyOptions}>
-        <Stack.Screen name="AnimeTabs" component={AnimeTabs} />
-        <Stack.Screen name="Favorites" component={Favourites} options={{ headerTitle: 'Favorites' }} />
+      <Stack.Navigator screenOptions={{
+        headerTintColor: COLORS.black,
+      }}>
+        <Stack.Screen name="AnimeTabs" component={AnimeTabs} options={{ headerTitle: 'Anime Listing', headerLeft: () => <CustomDrawerButton /> }} />
+        <Stack.Screen name="Favorites" component={Favourites} options={{ headerTitle: 'Favorites', headerLeft: () => <CustomDrawerButton /> }} />
         <Stack.Screen name="Details" component={Details} options={{ headerTitle: 'Details' }} />
       </Stack.Navigator>
     );
@@ -42,12 +41,10 @@ function App(): React.JSX.Element {
   function AnimeTabs() {
     return (
       <Tab.Navigator screenOptions={{
-        ...hideHeaderCompletelyOptions,
-        tabBarActiveTintColor: COLORS.blue, // Light blue for focused tabs
-        // tabBarInactiveTintColor: '#000000', // Black for unfocused tabs
+        headerShown: false,
+        tabBarActiveTintColor: COLORS.blue,
         tabBarLabelStyle: {
           fontWeight: 'bold',
-          // color: COLORS.blue,
         },
       }}>
         <Tab.Screen
@@ -95,9 +92,11 @@ function App(): React.JSX.Element {
 
   function MainDrawer() {
     return (
-      <Drawer.Navigator>
-        <Drawer.Screen name="Anime Listing" component={MainStack} options={{ headerTitle: 'Anime Listing', drawerLabel: 'Anime Listing' }} />
-        <Drawer.Screen name="Favorites" component={Favourites} options={{ drawerLabel: 'Favorites' }} />
+      <Drawer.Navigator screenOptions={{
+        headerTintColor: COLORS.black,
+      }}>
+        <Drawer.Screen name="Anime Listing" component={MainStack} options={{ drawerLabel: 'Anime Listing', headerShown: false }} />
+        <Drawer.Screen name="Favorites" component={Favourites} options={{ drawerLabel: 'Favorites', headerLeft: () => <CustomDrawerButton /> }} />
       </Drawer.Navigator>
     );
   }
