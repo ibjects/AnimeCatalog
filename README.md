@@ -3,10 +3,6 @@
 
 ### DOWNLOAD APK: https://github.com/thechaudharysab/AnimeCatalog/releases/tag/v1.0
 
-- NodeJS v18.19.1
-- npm v10.2.4
-- Java v17
-
 ## Video
 
 https://github.com/thechaudharysab/AnimeCatalog/assets/6399152/9bf7b21b-b1c7-4e72-800e-b3aa3dbb283c
@@ -33,6 +29,10 @@ The app has the following functionalities:
 4. _For iOS only_: Open terminal `cd <project path>` and then run `yarn pod-install`
 5. To run on Android: Open terminal `cd <project path>` and then run `yarn start` and press `a` to run on android. *If you face an unknown error, please try `yarn start --reset-cache` and press `a` to run on android.*
 
+##### System Settings
+- NodeJS v18.19.1
+- npm v10.2.4
+- Java v17
 
 #### Debugging & Testing
 
