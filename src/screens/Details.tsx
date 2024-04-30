@@ -55,7 +55,7 @@ export default function Details() {
                     resizeMode="contain" />
                 <View style={styles.contentContainer}>
                     <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.subTitle}>{source} • {year} • {duration}</Text>
+                    <Text style={styles.subTitle}>{source} {year && `• ${year} `}• {duration}</Text>
                     <Text style={styles.headerDescriptionText}>{rating}</Text>
                     <Divider />
                     <Text style={styles.scoreText}>⭐ {score ?? '0.0'} {' '} 🌐 {rank} {' '} 🔥 {popularity} </Text>
@@ -74,7 +74,6 @@ export default function Details() {
                     <Text style={styles.detailsHeading}>Background</Text>
                     <Text style={styles.detailsText}>{background}</Text>
                 </>}
-
             </View>
         </ScrollView>
     );

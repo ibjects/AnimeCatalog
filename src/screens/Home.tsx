@@ -30,7 +30,8 @@ export default function Home({ status }: HomeProps) {
             <FlatList
                 data={animeList}
                 keyExtractor={(item, index) => item.mal_id.toString() + index.toString()}
-                renderItem={({ item }) => <AnimeItem animeItem={item} />} />
+                renderItem={({ item }) => <AnimeItem animeItem={item} />}
+                showsVerticalScrollIndicator={false} />
         </View>
     );
 }

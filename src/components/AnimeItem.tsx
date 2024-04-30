@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
         height: 120,
         justifyContent: 'flex-end',
         padding: 12,
+        borderTopLeftRadius: 12,
+        borderBottomLeftRadius: 12,
+        overflow: 'hidden',
     },
     favouriteButtonContainer: {
         backgroundColor: COLORS.blue,
@@ -54,6 +57,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 4,
         width: 50,
+        borderTopRightRadius: 12,
+        borderBottomRightRadius: 12,
     },
     favouriteLabel: {
         fontSize: 22,
