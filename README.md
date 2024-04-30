@@ -14,6 +14,7 @@ The app has the following functionalities:
 - Drawer, Stack, and Tab Navigation implemented
 - Anime Listing View which has three tabs i.e. Airing, Complete, & Upcoming
 - Each Anime Listing Tab has a search bar
+- Each tab is infinite scroll until the API has data. Proper pagination is implemented.
 - Selecting any anime from the list take you to it's details screen
 - Drawer navigation has two screens i.e. Anime Listing and Favourites
 - All API calls are done using react-query
