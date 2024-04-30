@@ -2,7 +2,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { BaseURL, Status } from '../utils/constants';
 
-export const useFetchAnimeListing = (status: Status) => {
+const useFetchAnimeListing = (status: Status) => {
 
     var urlParameters = `anime?q=&status=${status.toLowerCase()}&page=`;
     if (status === Status.Upcoming) {
@@ -19,3 +19,4 @@ export const useFetchAnimeListing = (status: Status) => {
     });
 };
 
+export default useFetchAnimeListing;

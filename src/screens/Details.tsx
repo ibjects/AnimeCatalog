@@ -3,7 +3,7 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, Linking, TouchableOpacity, Alert } from 'react-native';
 import { RootStackParamList } from '../utils/RootStackParmsList';
-import { useAnimeDetails } from '../hooks/useAnimeDetails';
+import { useAnimeDetails } from '../hooks';
 import Loading from '../components/Loading';
 import { COLORS } from '../utils/colors';
 import Divider from '../components/Divider';
