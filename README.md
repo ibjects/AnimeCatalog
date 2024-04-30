@@ -9,6 +9,18 @@
 
 https://github.com/thechaudharysab/AnimeCatalog/assets/6399152/9bf7b21b-b1c7-4e72-800e-b3aa3dbb283c
 
+### TLDR of functionalities:
+The app has the following functionalities:
+- Drawer, Stack, and Tab Navigation implemented
+- Anime Listing View which has three tabs i.e. Airing, Complete, & Upcoming
+- Each Anime Listing Tab has a search bar
+- Selecting any anime from the list take you to it's details screen
+- Drawer navigation has two screens i.e. Anime Listing and Favourites
+- All API calls are done using react-query
+- Custom hooks created for majority of the functionalities
+- Favourities functionality implemented using async-storage
+- User can add/remove favourites
+- Empty view placeholders added where needed
 
 ### How to run locally
 
