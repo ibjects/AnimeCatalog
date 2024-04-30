@@ -58,13 +58,17 @@ export default function Details() {
                     <Text style={styles.subTitle}>{source} {year && `• ${year} `}• {duration}</Text>
                     <Text style={styles.headerDescriptionText}>{rating}</Text>
                     <Divider />
-                    <Text style={styles.scoreText}>⭐ {score ?? '0.0'} {' '} 🌐 {rank} {' '} 🔥 {popularity} </Text>
+                    <Text style={styles.scoreText}>⭐ {score ?? '0.0'} {' '} {rank && `🌐 ${rank} `} 🔥 {popularity} </Text>
                     <Divider />
                     {trailer.url && <TouchableOpacity onPress={() => openTrailerURL(trailer.url)}>
                         <Text style={styles.trailerButtonText}>Watch Trailer</Text>
                     </TouchableOpacity>}
                 </View>
             </View>
+            {/* TODO: REMOVE THIS UI TEST CONDITION */}
+            {/* <Pressable style={styles.favouriteButtonContainer}>
+                <Text style={styles.favouriteLabel}>{(animeItem.mal_id % 2 === 0) ? '♡' : '♥'}</Text>
+            </Pressable> */}
             <TouchableOpacity style={styles.favButton}>
                 <Text style={styles.favButtonLabel}>♡ Add to Favourite</Text>
             </TouchableOpacity>

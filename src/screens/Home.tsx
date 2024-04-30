@@ -13,7 +13,7 @@ interface HomeProps {
 
 export default function Home({ status }: HomeProps) {
 
-    const { animeList, isLoading, isError } = useFetchAnimeListing(status);
+    const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage } = useFetchAnimeListing(status);
 
     if (isLoading) { return <Loading />; }
     if (isError) { return <Text>Error...</Text>; }
@@ -28,10 +28,16 @@ export default function Home({ status }: HomeProps) {
                 />
             </View>
             <FlatList
-                data={animeList}
-                keyExtractor={(item, index) => item.mal_id.toString() + index.toString()}
+                data={data?.pages.flatMap((page) => page.data)}
+                keyExtractor={(item, index) => item?.mal_id?.toString() + index.toString()}
                 renderItem={({ item }) => <AnimeItem animeItem={item} />}
-                showsVerticalScrollIndicator={false} />
+                showsVerticalScrollIndicator={false}
+                onEndReached={() => { if (hasNextPage) { fetchNextPage(); } }}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={
+                    isFetchingNextPage ? <Loading /> : null
+                }
+            />
         </View>
     );
 }

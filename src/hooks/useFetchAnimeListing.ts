@@ -1,40 +1,21 @@
 /* eslint-disable prettier/prettier */
-
-/**
- * From the API docs, we'll need the following endpoints:
- * https://api.jikan.moe/v4/seasons/upcoming
- * https://api.jikan.moe/v4/anime?q=&status=Airing
- * https://api.jikan.moe/v4/anime?q=&status=complete
- */
-
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { BaseURL, Status } from '../utils/constants';
 
 export const useFetchAnimeListing = (status: Status) => {
 
-    var urlParameters = `anime?q=&status=${status.toLowerCase()}`;
+    var urlParameters = `anime?q=&status=${status.toLowerCase()}&page=`;
     if (status === Status.Upcoming) {
-        urlParameters = `seasons/${status.toLowerCase()}`;
+        urlParameters = `seasons/${status.toLowerCase()}?page=`;
     }
 
-    const animeList = useQuery<AnimeCatalog.ApiResponse, Error>({
+    return useInfiniteQuery({
         queryKey: ['getAnimeList', status],
-        queryFn: () => fetch(`${BaseURL}/${urlParameters}`).then((res) => res.json()),
-        select: data => {
-            // Sort by score descending
-            const sortedAnime = data.data.sort((a, b) => b.score - a.score);
-            return {
-                ...data,
-                data: sortedAnime,
-            };
+        queryFn: ({ pageParam = 1 }) => fetch(`${BaseURL}/${urlParameters}${pageParam}`).then((res) => res.json()),
+        initialPageParam: 1,
+        getNextPageParam: (lastPage, _allPages) => {
+            return lastPage.pagination?.has_next_page ? lastPage.pagination.current_page + 1 : undefined;
         },
     });
-
-    return {
-        ...animeList,
-        animeList: animeList.data?.data,
-        pagination: animeList.data?.pagination,
-    };
-
 };
 
