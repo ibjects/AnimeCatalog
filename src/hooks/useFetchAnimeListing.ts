@@ -20,6 +20,14 @@ export const useFetchAnimeListing = (status: Status) => {
     const animeList = useQuery<AnimeCatalog.ApiResponse, Error>({
         queryKey: ['getAnimeList', status],
         queryFn: () => fetch(`${BaseURL}/${urlParameters}`).then((res) => res.json()),
+        select: data => {
+            // Sort by score descending
+            const sortedAnime = data.data.sort((a, b) => b.score - a.score); 
+            return {
+                ...data,
+                data: sortedAnime,
+            };
+        },
     });
 
     return {

@@ -13,6 +13,7 @@ import Details from './src/screens/Details';
 import Favourites from './src/screens/Favourites';
 import { Status } from './src/utils/constants';
 import { Image } from 'react-native';
+import { COLORS } from './src/utils/colors';
 
 function App(): React.JSX.Element {
 
@@ -42,8 +43,11 @@ function App(): React.JSX.Element {
     return (
       <Tab.Navigator screenOptions={{
         ...hideHeaderCompletelyOptions,
+        tabBarActiveTintColor: COLORS.blue, // Light blue for focused tabs
+        // tabBarInactiveTintColor: '#000000', // Black for unfocused tabs
         tabBarLabelStyle: {
           fontWeight: 'bold',
+          // color: COLORS.blue,
         },
       }}>
         <Tab.Screen

@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
-// Anime Listing View
-
 import React from 'react';
-import { Text, StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, View, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { Status } from '../utils/constants';
 import { useFetchAnimeListing } from '../hooks/useFetchAnimeListing';
+import AnimeItem from '../components/AnimeItem';
+import { COLORS } from '../utils/colors';
 
 interface HomeProps {
     status: Status;
@@ -19,13 +19,17 @@ export default function Home({ status }: HomeProps) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>{status}</Text>
+            <View style={styles.headerContainer}>
+                <Text style={styles.heading}>{status}</Text>
+                <TextInput
+                    placeholder="Search by anime name..."
+                    style={styles.searchBar}
+                />
+            </View>
             <FlatList
                 data={animeList}
                 keyExtractor={(item, index) => item.mal_id.toString() + index.toString()}
-                renderItem={({ item }) => (
-                    <Text>{item.title}</Text>
-                )} />
+                renderItem={({ item }) => <AnimeItem animeItem={item} />} />
         </View>
     );
 }
@@ -34,16 +38,27 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 12,
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     loading: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 8,
+    },
+    searchBar: {
+        backgroundColor: COLORS.lightGray,
+        flex: 1,
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 22,
+        marginLeft: 8,
+    },
     heading: {
-        marginVertical: 16,
         fontSize: 20,
         fontWeight: 'bold',
         color: 'black',

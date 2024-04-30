@@ -3,7 +3,7 @@ declare namespace AnimeCatalog {
     interface Anime {
     // image, name, rating, score, year
     mal_id: number;
-    image: {
+    images: {
         jpg: {
             image_url: string;
         };
