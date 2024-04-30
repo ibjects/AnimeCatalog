@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -14,6 +16,8 @@ import { Image } from 'react-native';
 
 function App(): React.JSX.Element {
 
+  const queryClient = new QueryClient();
+
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
   const Drawer = createDrawerNavigator();
@@ -22,7 +26,7 @@ function App(): React.JSX.Element {
     headerShown: false,
   };
 
-  const tabBarItemIconStyle = { width: 20, height: 20 }
+  const tabBarItemIconStyle = { width: 20, height: 20 };
 
   function MainStack() {
     return (
@@ -95,9 +99,11 @@ function App(): React.JSX.Element {
   }
 
   return (
-    <NavigationContainer>
-      <MainDrawer />
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <MainDrawer />
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
