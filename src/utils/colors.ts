@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export const COLORS = {
     blue_shade: '#1C274C',
     bg_black: '#1F1F1F',

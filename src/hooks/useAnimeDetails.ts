@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useQuery } from '@tanstack/react-query';
 
 const useAnimeDetails = (malId: number) => {

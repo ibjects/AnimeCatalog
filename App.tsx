@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 

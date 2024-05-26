@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { BaseURL, Status } from '../utils/constants';
 

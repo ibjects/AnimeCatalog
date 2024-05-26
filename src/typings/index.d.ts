@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 declare namespace AnimeCatalog {
     interface Anime {
         mal_id: number;

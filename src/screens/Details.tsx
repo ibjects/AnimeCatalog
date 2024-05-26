@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, Linking, TouchableOpacity, Alert } from 'react-native';

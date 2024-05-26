@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useMemo, useState } from 'react';
 import { Text, StyleSheet, View, FlatList, TextInput, TouchableOpacity } from 'react-native';
 import { Status } from '../utils/constants';
@@ -45,7 +44,7 @@ export default function Home({ status }: HomeProps) {
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Text style={styles.heading}>{status}</Text>
-                <View style={styles.searchBarContainer}>
+                {/* <View style={styles.searchBarContainer}>
                     <TextInput
                         placeholder="Search by name..."
                         style={styles.searchBar}
@@ -55,7 +54,7 @@ export default function Home({ status }: HomeProps) {
                     <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
                         <Text>X</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
 
             {(filteredData && filteredData.length !== 0) ? <FlatList
@@ -68,7 +67,7 @@ export default function Home({ status }: HomeProps) {
                 ListFooterComponent={
                     isFetchingNextPage ? <Loading /> : null
                 }
-            /> : <Text>No results found.</Text>}
+            /> : <Text style={styles.noResultFoundLabel}>𓆝 𓆟 𓆞 𓆝 𓆟{'\n'}No results found{'\n'}𓆝 𓆟 𓆞 𓆝 𓆟</Text>}
         </View>
     );
 }
@@ -116,5 +115,12 @@ const styles = StyleSheet.create({
     retryButton: {
         fontSize: 16,
         color: COLORS.blue,
+    },
+    noResultFoundLabel: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: COLORS.blue,
+        margin: 'auto',
+        fontWeight: 'bold',
     },
 });
