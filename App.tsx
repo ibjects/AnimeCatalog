@@ -1,5 +1,8 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
+import { PersistQueryClientProvider, removeOldestQuery } from '@tanstack/react-query-persist-client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,9 +18,23 @@ import { COLORS } from './src/utils/colors';
 import CustomDrawerButton from './src/components/CustomDrawerButton';
 import CustomDrawerHeader from './src/components/CustomDrawerHeader';
 
+
 function App(): React.JSX.Element {
 
-  const queryClient = new QueryClient();
+  const MINUTE = 1000 * 60;
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        gcTime: 30 * MINUTE, // garbage collection time.
+      },
+    },
+  });
+
+  const asyncStoragePersister = createAsyncStoragePersister({
+    key: 'AnimeCatalogQueryClient',
+    storage: AsyncStorage,
+    retry: removeOldestQuery,
+  });
 
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -112,11 +129,14 @@ function App(): React.JSX.Element {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister: asyncStoragePersister }}
+    >
       <NavigationContainer>
         <MainDrawer />
       </NavigationContainer>
-    </QueryClientProvider>
+    </PersistQueryClientProvider>
   );
 }
 
