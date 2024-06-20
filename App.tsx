@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { QueryClient } from '@tanstack/react-query';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
@@ -24,7 +26,10 @@ function App(): React.JSX.Element {
   const MINUTE = 1000 * 60;
   const queryClient = new QueryClient({
     defaultOptions: {
+      // These options will apply globally to all queries.
       queries: {
+        refetchOnWindowFocus: false, // the query will not refetch on window focus.
+        refetchOnMount: false, // will disable additional instances of a query to trigger background refetch.
         gcTime: 30 * MINUTE, // garbage collection time.
       },
     },

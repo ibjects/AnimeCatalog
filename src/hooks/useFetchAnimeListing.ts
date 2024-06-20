@@ -10,7 +10,7 @@ const useFetchAnimeListing = (status: Status) => {
 
     return useInfiniteQuery({
         queryKey: ['getAnimeList', status],
-        queryFn: ({ pageParam = 1 }) => fetch(`${BaseURL}/${urlParameters}${pageParam}`).then((res) => {
+        queryFn: ({ pageParam }) => fetch(`${BaseURL}/${urlParameters}${pageParam}`).then((res) => {
             if (!res.ok) {
                 throw new Error(`Network response was not ok, status ${res.status}`);
             }

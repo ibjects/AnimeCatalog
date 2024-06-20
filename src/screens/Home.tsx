@@ -44,7 +44,7 @@ export default function Home({ status }: HomeProps) {
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Text style={styles.heading}>{status}</Text>
-                {/* <View style={styles.searchBarContainer}>
+                <View style={styles.searchBarContainer}>
                     <TextInput
                         placeholder="Search by name..."
                         style={styles.searchBar}
@@ -54,7 +54,7 @@ export default function Home({ status }: HomeProps) {
                     <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
                         <Text>X</Text>
                     </TouchableOpacity>
-                </View> */}
+                </View>
             </View>
 
             {(filteredData && filteredData.length !== 0) ? <FlatList
